@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardDAO">
+	
+	<insert id="insertBoard">
+		insert into board(bno, title, writer, content, bFile) 
+		values ((select nvl(max(bno), 0)+1 from board),#{title},#{writer},#{content},#{bFile})
+	</insert>
+	
+	<!-- <select id="getBoardList_T" parameterType="board" resultType="board">
+	아무것도 검색안한 조건이 like '%'||''||'%' 이면, 전체 조회가 되기때문에 이렇게 해도 전체 조회가 실행이 됨. 
+		
+		select * from board
+
+		<if test="searchCondition == 'TITLE'">
+			AND title like '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition == 'CONTENT'">
+			AND content like '%'||#{searchKeyword}||'%'
+		</if>
+		order by bno desc
+		
+	</select> -->
+	
+<!-- 	<select id="getBoardList_C" resultType="board">
+		<![CDATA[
+		select * from board
+		where content like '%'||#{searchKeyword}||'%'
+		and seq<15
+		order by seq desc
+		]]>
+	</select>
+	 -->
+	<select id="getBoard" resultType="board">
+		select * from board where bno = #{bno}
+	</select>
+	
+	<!-- 조회수 올라가는 기능 -->
+	<update id="cntUpdate">
+		update board
+	    set cnt = cnt + 1
+	    where bno = #{bno}
+	</update>
+	
+	<update id="modityBoard">
+		update board set title = #{title}, content = #{content}, bFile = #{bFile} where bno = #{bno}
+	</update>
+	
+	<delete id="deleteBoard">
+		delete from board where bno = #{bno}
+	</delete>
+
+
+	<!-- search -->
+	<sql id="search">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+		<choose>
+            <when test="searchCondition == 'TITLE'">
+            	title like '%'||#{searchKeyword}||'%'
+            </when>
+            <when test="searchCondition == 'CONTENT'">
+            	content like '%'||#{searchKeyword}||'%'
+            </when>
+        </choose>
+		</trim>
+	</sql>
+	
+	<!-- page -->
+	<select id="getListWithPaging" resultType="board">
+		select * from (
+		    select
+		    rownum rn, bno, title, writer, regDate, cnt
+		    from (
+			    select
+			    rownum rn, bno, title, writer, regDate, cnt
+			    from board
+		 		where 1 = 1
+				<if test="searchCondition == 'TITLE'">
+					AND title like '%'||#{searchKeyword}||'%'
+				</if>
+				<if test="searchCondition == 'CONTENT'">
+					AND content like '%'||#{searchKeyword}||'%'
+				</if>
+		        order by bno desc
+	        )
+		    where bno > 0 and rownum > 0 and (#{pageNum} * #{amount}) >= rownum
+		)
+		where rn > (#{pageNum} - 1) * #{amount}
+	</select>
+
+	<select id="getTotalCount" resultType="int">
+	    <![CDATA[
+	    	select count(*) from board where
+	    ]]>
+	    	<include refid="search"></include>
+	    <![CDATA[
+	    	bno > 0
+	    ]]>
+	</select>
+	
+	
+
+
+
+
+				
+
+</mapper>

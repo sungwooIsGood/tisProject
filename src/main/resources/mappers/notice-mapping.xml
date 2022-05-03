@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NoticeDAO">
+	
+	<insert id="insertNotice">
+		insert into notice(seq, title, content, nFile) 
+		values ((select nvl(max(seq), 0)+1 from notice),#{title},#{content},#{nFile})
+	</insert>
+	
+	<!-- <select id="getNoticeList_T" parameterType="notice" resultType="notice">
+	아무것도 검색안한 조건이 like '%'||''||'%' 이면, 전체 조회가 되기때문에 이렇게 해도 전체 조회가 실행이 됨. 
+		
+		select * from notice
+		where 1 = 1
+		<if test="searchCondition == 'TITLE'">
+			AND title like '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition == 'CONTENT'">
+			AND content like '%'||#{searchKeyword}||'%'
+		</if>
+		order by seq desc
+		
+	</select> -->
+	
+<!-- 	<select id="getBoardList_C" resultType="board">
+		<![CDATA[
+		select * from board
+		where content like '%'||#{searchKeyword}||'%'
+		and seq<15
+		order by seq desc
+		]]>
+	</select>
+	 -->
+	<select id="getNotice" resultType="notice">
+		select * from notice where seq = #{seq}
+	</select>
+	
+	<select id="getNoticeWindow" resultType="notice">
+		select * from notice where seq = (select max(seq) from notice)
+	</select>
+	
+	<!-- 조회수 올라가는 기능 -->
+	<update id="cntUpdate">
+		update notice
+	    set cnt = cnt + 1
+	    where seq = #{seq}
+	</update>
+	
+	<update id="modityNotice">
+		update notice set title = #{title}, content = #{content}, nFile = #{nFile} where seq = #{seq}
+	</update>
+	
+	<delete id="deleteNotice">
+		delete from notice where seq = #{seq}
+	</delete>
+
+
+	<!-- search -->
+	<sql id="search">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+		<choose>
+            <when test="searchCondition == 'TITLE'">
+            	title like '%'||#{searchKeyword}||'%'
+            </when>
+            <when test="searchCondition == 'CONTENT'">
+            	content like '%'||#{searchKeyword}||'%'
+            </when>
+        </choose>
+		</trim>
+	</sql>
+
+	<!-- page -->
+	<select id="getListWithPaging" resultType="notice">
+	    
+		select * from (
+		    select
+		    rownum rn, seq, title, regDate, cnt
+		    from (
+			    select
+			    rownum rn, seq, title, regDate, cnt
+			    from notice
+			    where 1 = 1
+				<if test="searchCondition == 'TITLE'">
+					AND title like '%'||#{searchKeyword}||'%'
+				</if>
+				<if test="searchCondition == 'CONTENT'">
+					AND content like '%'||#{searchKeyword}||'%'
+				</if>
+				order by seq desc
+			)
+		    where seq > 0 and rownum > 0 and (#{pageNum} * #{amount}) >= rownum
+		    
+		)
+		where rn > (#{pageNum} - 1) * #{amount}
+		
+	</select>
+
+	<select id="getTotalCount" resultType="int">
+	    <![CDATA[
+	    	select count(*) from notice where
+	    ]]>
+	    	<include refid="search"></include>
+	    <![CDATA[
+	    	seq > 0
+	    ]]>
+	</select>
+
+
+
+
+</mapper>

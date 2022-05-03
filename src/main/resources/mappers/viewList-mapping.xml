@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ViewListDAO">
+
+	<resultMap type="viewList" id="viewListResult">
+		<id property="viewNo" column="viewNo"></id> <!-- PK키 일경우 id태그, 그외엔 result태그 -->
+		<result property="userNo" column="userNo"/>
+		<result property="titleNo" column="titleNo"/>
+		<result property="viewDate" column="viewDate"/>
+		<result property="lastViewDate" column="lastViewDate"/>
+	</resultMap>
+	
+	<insert id="insertViewList">
+		insert into viewList (viewNo, userNo, titleNo)
+		values(viewlist_no.nextval, #{userNo}, #{titleNo})
+	</insert>
+	
+	<delete id="deleteViewListByUser">
+		delete from viewList where userNo=#{userNo}
+	</delete>
+	
+	<delete id="deleteViewListByTitle">
+		delete from viewList where titleNo=#{titleNo}
+	</delete>
+	
+	<select id="getViewList" resultType="viewList">
+		select * from viewList where userNo=#{userNo} and titleNo=#{titleNo}
+	</select>
+	
+	<select id="getViewListCountByTitle" resultType="Integer">
+		select titleNo, count(titleNo) as count from viewList
+		    group by titleNo
+		    having titleNo = #{titleNo}
+	</select>
+	
+</mapper>

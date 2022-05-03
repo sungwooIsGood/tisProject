@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+.content{
+	padding: 0 0 0 240px;
+	height:100%;
+}
+
+h1{
+	padding: 60px;
+}
+
+.maincontent{
+	text-align: center;
+}
+
+.insertBoard{
+	margin: 0 auto;
+	width: 1200px;
+	height: 600px;
+	font-size: 20px;
+}
+
+.insertBoard tr th{
+	border: 1px solid #fff;
+}
+
+.insertBoard tr td{
+	border: 1px solid #fff;
+}
+
+.insert {
+	text-align:center;
+	height: 100px;
+	
+}
+
+
+
+.insertContent {
+	text-align:center;
+	height: 600px;
+}
+
+.insertinput{
+	width: 100%;
+	height: 100%;
+}
+
+.show-placeholder{
+	background: #fff;
+}
+button{
+	color: #000;
+}

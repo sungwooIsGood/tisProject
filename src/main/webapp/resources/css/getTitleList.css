@@ -1,0 +1,112 @@
+@charset "utf-8";
+
+#wrap {padding-left:240px;}
+
+h1 {
+	text-align:center;
+	font-size: 26px;
+	padding:20px;
+}
+
+.titleList {
+	width: 1200px;
+	margin: 0 auto;
+	text-align:center;
+}
+
+.titleListRow {
+	border-bottom: 1px solid #eee;
+}
+
+.titleListLink {
+	display: box;
+}
+
+.titleListValue:hover > a > p {
+	color: #ccc;
+}
+
+.titleNo, .title, .director, .actor, .releaseDate, .age {
+	float: left;
+	padding: 3px;
+}
+
+.titleListHead {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.titleNo {
+	width: 50px;
+}
+
+.title {
+	width: 550px;
+}
+
+.director {
+	width: 100px;
+}
+
+.actor {
+	width: 150px;
+}
+
+.releaseDate {
+	width: 150px;
+}
+
+.age {
+	width: 200px;
+}
+
+.insertTitle {
+	margin-top: 10px;
+	float: right;
+}
+
+.insertTitle:hover {
+	color: #ccc;
+}
+
+.pageNumber:hover {
+	color: #ccc;
+}
+
+.pageArrow:hover {
+	color: #ccc;
+}
+
+.inputBox {
+	margin-top: 10px;
+}
+
+#keywordSearch {
+	color: #000;
+	height: 25px;
+	border-radius:5px;
+}
+
+#keywordSearch option {
+	color: #000;
+}
+
+#inputSearch {
+	color: #000;
+	height: 25px;
+	border-radius: 5px;
+}
+
+#submit {
+	color: #eee;
+	width: 50px;
+	height: 25px;
+	border-radius: 5px;
+	border:1px solid #eee;
+	background-color: #222;
+}
+
+#submit:hover {
+	background-color: #eee;
+	color: #222;
+}

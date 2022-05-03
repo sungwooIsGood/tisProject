@@ -1,0 +1,289 @@
+@charset "utf-8";
+
+#wrap {padding-left:240px;}
+
+main{
+     -webkit-flex:1;
+     -ms-flex:1;
+     flex:1;
+     padding:30px;
+}
+
+.backImgBox{
+	height: 500px;
+	position:relative;
+}
+
+h1 {
+	font-size: 26px;
+	margin: 10px 0;
+}
+
+.headBox > div {
+	float:left;
+}
+
+.avgGradeBox {
+	border: 3px solid #fff;
+	width: 116px;
+	height: 36px;
+}
+
+.avgGradeBox p {
+	font-weight: bold;
+	font-size: 12px;
+	padding: 5px 10px;
+	text-align:center;
+	line-height:20px;
+}
+
+.avgGradeLeft {
+	background-color: #000;
+	float:left;
+}
+
+.avgGradeRight {
+	color: #000;
+	background-color: #fff;
+	float:right;
+}
+
+.ageEpisode {
+	margin-left: 20px;
+}
+
+.ageEpisode p {
+	margin:10px 0;
+	font-size: 14px;
+	font-weight: bold;
+	color: #ccc;
+}
+
+.infoBox {
+	
+}
+
+.episodeBox {
+	display:none;
+}
+
+.infoBox, .episodeBox {
+	margin: 20px 0;
+}
+
+.synopsis {
+	width: 50%;
+	margin: 20px 0;
+}
+
+.summary {
+	font-size: 12px;
+	
+}
+
+.summary li {
+	color: #ccc;
+}
+
+.summary li a {
+	color: #ccc;
+}
+
+.summary li a:hover {
+	color: #fff;
+}
+
+.summaryLeft {
+	display: inline-block;
+	width: 50px;
+}
+
+.playBox {
+	margin: 20px 0;
+}
+
+.playBox > div {
+	float: left;
+	margin-right: 20px;
+}
+
+.playBox button {
+	background-color: #000;
+	color: #ccc;
+	font-size: 16px;
+	height: 36px;
+	text-align:center;
+	line-height: 36px;
+	font-weight: bold;
+	cursor:pointer;
+	border:none;
+}
+
+.playBox button:hover {
+	color: #fff;
+}
+
+.play {
+	background-color: #F82F62;
+	width: 80px; height: 36px;
+	text-align:center;
+	border-radius: 5px;
+	line-height: 36px;
+	font-weight: bold;
+}
+
+.play a { display:block;}
+
+.setGradeBox > div {
+	float: left
+}
+
+.setGradeWordBox {
+	padding-top:5px;
+	width: 150px;
+}
+
+.setGradeWord {
+	font-size:14px;
+	color: #ccc;
+	font-weight:bold;
+	margin-top: 5px;
+}
+.starBoxIn {
+	position:relative;
+	cursor:pointer;
+}
+
+.emptyStar {
+	position:absolute;
+	font-size:20px;
+	top:0;
+}
+
+.fullStar {
+	position:absolute;
+	font-size:20px;
+	top:0;
+	width:0%;
+	overflow:hidden;
+}
+
+.episodeBox {
+	position:relative;
+}
+
+.slideBox {
+	position:absolute;
+	width: 1200px;
+	height:270px;
+	overflow: hidden;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.episodeList {
+	margin: 20px auto;
+	position:absolute;
+}
+
+.slidePrev {
+	position:absolute;
+	display: none;
+	cursor: pointer;
+	width: 50px;
+	height: 50px;
+	text-align:center;
+	line-height: 50px;
+	background-color: rgba(0, 0, 0, 0.7);
+	border-radius: 50%;
+	left: 20px;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 100;
+	font-size: 16px;
+	font-weight:bold;
+}
+
+.slideNext {
+	position:absolute;
+	cursor: pointer;
+	width: 50px;
+	height: 50px;
+	text-align:center;
+	line-height: 50px;
+	background-color: rgba(0, 0, 0, 0.7);
+	border-radius: 50%;
+	right: 20px;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 100;
+	font-size: 16px;
+	font-weight:bold;
+}
+
+.episodeList li {
+	float:left;
+	padding: 10px;
+	width:300px;
+	height:270px;
+}
+
+.thumbImgBox {
+	height: 200px;
+}
+
+.thumbImgBox a {
+	display:block;
+	height: 100%;
+}
+
+.thumbImgBox img {
+	width: 100%; height:100%; object-fit: cover;
+}
+
+.thumbNo {
+	color:#ccc;
+	font-size:14px;
+}
+
+.thumbMinute {
+	color:#ccc;
+	font-size:14px;
+}
+
+.thumbTitle {
+	color:#ccc;
+	font-weight:bold;
+}
+
+.buttonListBox {
+	position:absolute;
+	bottom: 20px;
+	left: 50%;
+	transform: translate(-50%, 0);
+}
+
+.buttonList li {
+	float: left;
+	color: rgba(255, 255, 255, 0.3);
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
+	height: 40px;
+}
+
+.buttonList li:first-child {
+	margin-right: 30px;
+}
+
+.buttonList li:hover {
+	color: rgba(255, 255, 255, 0.3);
+	border-bottom:solid 5px rgba(255, 255, 255, 0.3);
+	height: 40px;
+}
+
+.buttonList li.on {
+	color: #fff;
+	border-bottom:solid 5px #fff;
+	height: 40px;
+}

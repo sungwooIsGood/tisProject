@@ -1,0 +1,7 @@
+*.exe filter=lfs diff=lfs merge=lfs -text
+pom.xml filter=lfs diff=lfs merge=lfs -text
+src filter=lfs diff=lfs merge=lfs -text
+target filter=lfs diff=lfs merge=lfs -text
+srcmainresourcesffmpegbin filter=lfs diff=lfs merge=lfs -text
+*exe filter=lfs diff=lfs merge=lfs -text
+.exe filter=lfs diff=lfs merge=lfs -text

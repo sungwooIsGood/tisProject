@@ -1,0 +1,179 @@
+@charset "utf-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+body, h1, h2, h3, h4, p, ul, li, ol, dl, dt, dd, table, tr, td { 
+	margin: 0; padding: 0; color: #eee;
+  	}
+input, select{
+	margin: 0; padding: 0; color: #000;
+	}
+html {
+	background-color:#000;
+  	}
+header, footer, div, section, nav, aside, p, table, tr, td, input, select { box-sizing: border-box; }
+ul { list-style: none; }
+a { text-decoration: none; color: #eee; }
+img { vertical-align: top; } 
+.clear::after { content: ""; display: block; clear:both; }
+
+*{
+	box-sizing : border-box;
+}
+body {
+  margin: 0;
+}
+
+#root{
+	background: #000;
+	width: 100%;
+	height: 100%;
+}
+
+.content{
+	padding:0 0 0 240px;
+	height:100%;
+	margin:0 0 0 0;
+}
+
+.maincontent{
+	margin:0 auto;
+	-webkit-flex:1;
+    -ms-flex:1;
+    flex:1;
+    padding:0 0 101px;
+}
+
+h1 {
+	padding: 60px;
+}
+
+.search{
+	border-bottom: 6px solid #fff;
+	width: 1200px;
+}
+
+.listTitle th{
+	border-bottom: 6px solid #fff;
+	height: 30px;
+}
+
+.listTitle td{
+	border-bottom: 1px solid #fff;
+	height: 40px;
+}
+
+.boardList{
+  width: 1200px;
+};
+
+.list1 {
+	width: 50px;
+}
+.list2 {
+	width: 580px;
+}
+.list3 {
+	width: 200px;
+}
+.list4 {
+	width: 300px;
+}
+.list5 {
+	width: 70px;
+}
+
+.listvalue{
+	text-align: center;
+}
+
+/* *{
+	box-sizing : border-box;
+}
+
+html {
+  line-height: 1.15; 
+  -webkit-text-size-adjust: 100%;
+}
+
+#root{
+	width: 100%;
+	height: 100%;
+} */
+
+table{
+	/* border:1px solid #fff; */
+}
+
+.getBoardList{
+    margin:0 auto;
+    padding:50px 50px 0px 50px;
+    width: 1000px;
+}
+
+
+/* body {
+  margin: 0;
+} */
+
+
+.maincontent{
+	padding:0 auto;
+	width: 1200px;
+}
+
+table{
+	
+	margin-right: auto;
+    margin-left: auto;
+	text-align: center;
+}
+
+table .boardList {
+  border : 1px solid white;
+  border-collapse : collapse;
+};
+
+
+h1{
+	padding: 0;
+}
+
+h1{
+	color:#fff;
+	margin:0;
+	padding:60px 60px 60px 60px;
+}
+
+
+
+
+.maincontent{
+     -webkit-flex:1;
+     -ms-flex:1;
+     flex:1;
+     background:#000;
+     padding:0 0 101px;
+}
+a{
+	padding:8px;
+	
+}
+a:link, a:visited{
+	text-decoration-line:none;
+	color:#fff
+}   
+
+a:hover{
+	color:#d3d3d3
+}
+
+
+
+
+
+.insert{
+	width: 1000px;
+	margin-right: auto;
+    margin-left: auto;
+	text-align: right;
+}

@@ -1,0 +1,155 @@
+@charset "utf-8";
+
+#wrap {padding-left:240px;}
+
+h1 {
+	text-align:center;
+	font-size: 26px;
+	padding:20px;
+}
+
+table {
+	width: 1200px;
+	margin: 0 auto;
+	border-collapse: collapse;
+}
+
+.tableRow {
+	border-bottom: 1px solid #eee;
+	border-top: 1px solid #eee;
+}
+
+.tableTitle {
+	width: 80px;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.item {
+	float: left;
+	padding: 5px 10px;
+}
+
+.item>.itemName {
+	float: left;
+	width: 100px;
+}
+
+.item>.updateItem {
+	float: left;
+	margin: 0 5px;
+	border: 1px solid #ccc;
+	background-color: #eee;
+	padding: 2px 5px;
+	color: #333;
+	border-radius:5px;
+	cursor: pointer;
+}
+
+.item>.updateItem:hover {
+	border: 1px solid #fff;
+	background-color: #000;
+	color: #fff;
+}
+
+.item>.deleteItem {
+	float: left;
+	border: 1px solid #ccc;
+	background-color: #333;
+	padding: 2px 5px;
+	color: #eee;
+	border-radius:5px;
+	cursor: pointer;
+}
+
+.item>.deleteItem:hover {
+	border: 1px solid #fff;
+	background-color: #fff;
+	color: #000;
+}
+
+.item>.updateItemSubmit {
+	float: left;
+	margin: 0 5px;
+	border: 1px solid #ccc;
+	background-color: #333;
+	padding: 2px 5px;
+	color: #eee;
+	border-radius:5px;
+	cursor: pointer;
+}
+
+.item>.updateItemSubmit:hover {
+	border: 1px solid #fff;
+	background-color: #fff;
+	color: #000;
+}
+
+.item>.inputCancel {
+	float: left;
+	border: 1px solid #ccc;
+	background-color: #eee;
+	padding: 2px 5px;
+	color: #333;
+	border-radius:5px;
+	cursor: pointer;
+}
+
+.item>.inputCancel:hover {
+	border: 1px solid #fff;
+	background-color: #000;
+	color: #fff;
+}
+
+.item>.itemInput {
+	float: left;
+	width: 100px;
+	color: #555;
+}
+
+.inputBox {
+	width: 400px;
+	margin: 0 auto;
+}
+
+.inputBox h2 {
+	float: left;
+	font-size: 18px;
+	padding: 5px;
+}
+
+.inputBox>.insertItemOption {
+	float: left;
+	width: 70px;
+	height: 30px;
+	margin-top: 4px;
+	margin-right: 5px;
+	border-radius: 5px;
+	color: #333;
+}
+
+.inputBox>.insertItemName {
+	float: left;
+	height: 30px;
+	margin-top: 4px;
+	margin-right: 5px;
+	border-radius: 5px;
+	color: #333;
+}
+
+.inputBox>.insertItem {
+	float: left;
+	width: 70px;
+	height: 30px;
+	margin-top: 4px;
+	border: 1px solid #fff;
+	border-radius: 5px;
+	background-color: #000;
+	color: #fff;
+	cursor: pointer;
+}
+
+.inputBox>.insertItem:hover {
+	color: #111;
+	background-color: #eee;
+}

@@ -1,0 +1,141 @@
+@charset "utf-8";
+
+.leftmenu{
+	position:fixed;
+    top:0;
+    left:0;
+    z-index:501;
+    background:#141517;
+    width:240px;
+    height:100%;
+    border-right:1px #1b1c1d solid;
+ 	}
+
+.leftsction{
+	padding:0 16px;
+	margin:60px 0 0 0;
+}
+
+.leftmenubuttonul,.leftmenubuttonli{
+	list-style:none;
+	padding-left: 10px;
+}
+
+.leftmenubuttonli{
+	margin-top:20px;
+	font-size:20px;
+}
+
+.leftmenubuttonli a{
+	padding:8px;	
+}
+
+.leftmenubuttonli a:link, .leftmenubuttonli a:visited{
+	text-decoration-line:none;
+	color:#fff
+}   
+
+.leftmenubuttonli a:hover{
+	color:#d3d3d3
+}
+
+.logoimg{	
+	vertical-align:top;
+	width:88px;
+	height:26px;            
+	margin:24px 0 0 26px;
+}
+
+
+.userbar{
+	background-color:#141517;
+	height:80px;
+	padding-right:20px;
+	text-align:right;	
+	margin-top:-16px;
+	padding:50px 50px 50px 50px;
+}
+
+.icon{
+	float:right;
+}
+
+
+.userbar img{
+	border-radius:100%;
+	width:32px;
+	height:32px;
+	color:#fff;
+	transform:translate(0%,-15%);
+}
+
+.topmenu{
+	float: left;
+	margin: 0;
+	padding: 0;
+}
+.topmenu h1{
+	text-align:left;
+	margin: 0;
+	padding: 0;
+	color: #fff;
+}
+
+.clearfix{
+    	font-size: 15pt;
+    	font-family: 'PT Sans', Arial, Sans-serif;
+    	position: relative;
+    }
+    .clearfix ul{
+    	padding: 0;
+    	margin: 0 auto;
+    	width: auto;
+    }
+    .clearfix li{
+    }
+    .clearfix a{
+    	line-height: 50px;
+        height: 50px;
+    }
+    .clearfix li a{
+    	box-sizing: border-box;
+    	-moz-box-sizing: border-box;
+    	-webkit-box-sizing: border-box;
+    }
+    .clearfix li:last-child a{
+    	border-right: 0;
+        }
+        
+    .clearfix a#pull{
+    	display: none;
+    }
+    
+      html {
+      -webkit-touch-callout:none;
+      -webkit-user-select:none;
+      -webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+      }
+
+      .clearfixul{
+        /*list-style-type: none;*/
+        margin: 0;
+        padding: 0 0 0 300;
+        background-color: #ffffff;
+        background-color: rgba( 255, 255, 255, 0 );
+        text-align: left;
+      }
+      .clearfixul li{
+        /*position: relative;*/
+        display: inline-block;
+      }
+      .clearfixul li a{
+        color: #FFFFFF;
+        text-align: center;
+        padding: 20px 26px;
+        text-decoration: none;
+      }
+      .clearfixul li a:hover{
+        /*color: #597812;*/
+        color: #ccc;
+        font-weight:normal;
+      }

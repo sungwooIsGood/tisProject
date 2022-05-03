@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GradeDAO">
+
+	<resultMap type="grade" id="gradeResult">
+		<id property="gradeNo" column="gradeNo"></id> <!-- PK키 일경우 id태그, 그외엔 result태그 -->
+		<result property="userNo" column="userNo"/>
+		<result property="titleNo" column="titleNo"/>
+		<result property="grade" column="grade"/>
+	</resultMap>
+	
+	<insert id="insertGrade">
+		insert into grade (gradeNo, userNo, titleNo, grade)
+		values(grade_no.nextval, #{userNo}, #{titleNo}, #{grade})
+	</insert>
+	
+	<update id="updateGrade">
+		update grade set grade=#{grade} where gradeNo=#{gradeNo}
+	</update>
+	
+	<select id="getGrade" resultType="grade">
+		select * from grade where userNo=#{userNo} and titleNo=#{titleNo}
+	</select>
+	
+	<select id="getTitleAvg" resultType="Float">
+		select round(avg(grade), 1) as titleAvg
+		from grade
+		group by titleNo
+		having titleNo = #{titleNo}
+	</select>
+	
+	<delete id="deleteGradeByTitle">
+		delete from grade where titleNo=#{titleNo}
+	</delete>
+	
+	<delete id="deleteGradeByUser">
+		delete from grade where userNo=#{userNo}
+	</delete>
+</mapper>

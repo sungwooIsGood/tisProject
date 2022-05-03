@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- SQL 쿼리문 -->
+<mapper namespace="TitleDAO">
+
+	<resultMap type="title" id="titleResult">
+		<id property="titleNo" column="titleNo"></id> <!-- PK키 일경우 id태그, 그외엔 result태그 -->
+		<result property="title" column="title"/>
+		<result property="synopsis" column="synopsis"/>
+		<result property="actor" column="actor"/>
+		<result property="director" column="director"/>
+		<result property="releaseDate" column="releaseDate"/>
+		<result property="age" column="age"/>
+		<result property="series" column="series"/>
+		<result property="poster" column="poster"/>
+		<result property="backImg" column="backImg"/>
+	</resultMap>
+	
+	<insert id="insertTitle" keyProperty="titleNo">
+		insert into title (titleNo, title, synopsis, actor, director, releaseDate, age, series, poster, backImg)
+		values(title_no.nextval, #{title}, #{synopsis}, #{actor}, #{director}, #{releaseDate}, #{age}, #{series}, #{poster}, #{backImg})
+		<selectKey keyProperty="titleNo" resultType="int" order="AFTER">
+			select title_no.currval as titleNo from dual
+		</selectKey>
+	</insert>
+	
+	<update id="updateTitle">
+		update title set title=#{title}, synopsis=#{synopsis}, actor=#{actor}, director=#{director}, releaseDate=#{releaseDate},
+		updateDate=sysdate, age=#{age}, series=#{series}, poster=#{poster}, backImg=#{backImg} where titleNo=#{titleNo}
+	</update>
+	
+	<delete id="deleteTitle">
+		delete from title where titleNo=#{titleNo}
+	</delete>
+	
+	<select id="getTitle" resultType="title">
+		select * from title where titleNo=#{titleNo}
+	</select>
+	
+	<select id="getLastestTitleFive" resultType="title">
+		select titleNo, title, synopsis, actor, director, releaseDate, updateDate, age, series, poster, backImg 
+		from
+			(select titleNo, title, synopsis, actor, director, releaseDate, updateDate, age,
+			series, poster, backImg from title where 1=1
+			<if test = "searchType == 'M'">
+				and series='M'
+			</if>
+			<if test = "searchType == 'T'">
+				and series='T'
+			</if>
+		order by updateDate desc)
+		where rownum <![CDATA[ < ]]>= 5
+	</select>
+	
+	<select id="getLastestTitle" resultType="title">
+		select titleNo, title, synopsis, actor, director, releaseDate, updateDate, age, series, poster, backImg 
+		from
+			(select titleNo, title, synopsis, actor, director, releaseDate, updateDate, age,
+			series, poster, backImg from title where 1=1
+			order by updateDate desc)
+		where rownum = 1
+	</select>
+	
+	<select id="getBestGradeTitleFive" resultType="title">
+		select t.titleNo, t.title, t.synopsis, t. actor, t.director, t.releaseDate,
+		    t.updateDate, t.age, t.series, t.poster, t.backImg
+		from title t
+		inner join (select titleNo, avg(grade) as gradeAvg from grade
+		        group by titleNo order by gradeAvg desc) g
+		on t.titleNo = g.titleNo
+		where 1=1
+		<if test = "searchType == 'M'">
+			and series='M'
+		</if>
+		<if test = "searchType == 'T'">
+			and series='T'
+		</if>
+		and rownum <![CDATA[ < ]]>= 5
+	</select>
+	
+	<select id="getBestGradeTitle" resultType="title">
+		select t.titleNo, t.title, t.synopsis, t. actor, t.director, t.releaseDate,
+		    t.updateDate, t.age, t.series, t.poster, t.backImg
+		from title t
+		inner join (select titleNo, avg(grade) as gradeAvg from grade
+		        group by titleNo order by gradeAvg desc) g
+		on t.titleNo = g.titleNo
+		where 1=1 and rownum = 1
+	</select>
+	
+	<select id="getBestViewTitleFive" resultType="title">
+		select t.titleNo, t.title, t.synopsis, t. actor, t.director, t.releaseDate,
+			t.updateDate, t.age, t.series, t.poster, t.backImg
+		from title t
+		inner join (select titleNo, count(titleNo) as count from viewList
+		    group by titleNo order by count desc) c
+		on t.titleNo = c.titleNo
+		where 1=1
+		<if test = "searchType == 'M'">
+			and series='M'
+		</if>
+		<if test = "searchType == 'T'">
+			and series='T'
+		</if>
+		and rownum <![CDATA[ < ]]>= 5
+	</select>
+	
+	<select id="getBestViewTitle" resultType="title">
+		select t.titleNo, t.title, t.synopsis, t. actor, t.director, t.releaseDate,
+		    t.updateDate, t.age, t.series, t.poster, t.backImg
+		from title t
+		inner join (select titleNo, count(titleNo) as count from viewList
+		    group by titleNo order by count desc) c
+		on t.titleNo = c.titleNo
+		where 1=1 and rownum = 1
+	</select>
+	<select id="getGenreTitleFive" resultType="title">
+		select titleNo, title, synopsis, actor, director, releaseDate,
+		    updateDate, age, series, poster, backImg
+		from 
+		    (select t.titleNo, t.title, t.synopsis, t. actor, t.director, t.releaseDate,
+		        t.updateDate, t.age, t.series, t.poster, t.backImg
+		    from title t
+		    inner join titleitem ti
+		    on t.titleNo = ti.titleNo
+		    inner join item i
+		    on ti.itemNo = i.itemNo
+		    where i.itemNo = #{genreId}
+		    order by t.titleNo desc)
+		where 1=1
+		<if test = "searchType == 'M'">
+			and series='M'
+		</if>
+		<if test = "searchType == 'T'">
+			and series='T'
+		</if>
+		and rownum <![CDATA[ < ]]>= 5
+	</select>
+	
+	<select id="getTitleList" resultType="title" >
+		select * from title
+	</select>
+	
+	<select id="getTitleListPage" resultType="title">
+		
+			select titleNo, title, synopsis, actor, director, releaseDate, age, series,
+					poster, backImg
+				from
+				(
+				    select seq, titleNo, title, synopsis, actor, director, releaseDate, age, series,
+					      		poster, backImg
+				    from
+				    (
+				        select rownum as seq, titleNo, title, synopsis, actor, director, releaseDate, age, series,
+					      		poster, backImg
+				        from(
+				            select *
+				            from title
+				            where 1 = 1
+				            <if test="keywordSearch == 'T'">
+				            	and title like '%'||#{inputSearch}||'%'
+				            </if>
+				        	
+				             <if test="keywordSearch == 'D'">
+				             	and director like '%'||#{inputSearch}||'%'
+				            </if>
+				            
+				             <if test="keywordSearch == 'A'">
+				             	and actor like '%'||#{inputSearch}||'%'
+				            </if>
+				            order by titleNo desc
+				        )
+				    )
+			    where seq <![CDATA[ > ]]>= #{startTitle}
+			)
+			where rownum <![CDATA[ <]]>= #{stepTitle}
+		
+	</select>
+	
+	<select id="getTotalTitleCount" resultType="Integer">
+		select count(*) as totalTitleCount from title
+		where 1=1
+		<if test="keywordSearch == 'T'">
+        	and title like '%'||#{inputSearch}||'%'
+        </if>
+    	
+         <if test="keywordSearch == 'D'">
+         	and director like '%'||#{inputSearch}||'%'
+        </if>
+        
+         <if test="keywordSearch == 'A'">
+         	and actor like '%'||#{inputSearch}||'%'
+        </if>
+	</select>
+	
+	<select id="inputSearch" resultType="title">
+		select * from title
+		where 1 = 1
+		and (title like '%'||#{title}||'%' or
+			actor like '%'||#{actor}||'%' or
+			director like '%'||#{director}||'%'
+		)
+   </select>
+</mapper>

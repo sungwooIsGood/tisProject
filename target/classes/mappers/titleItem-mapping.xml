@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TitleItemDAO">
+
+	<resultMap type="titleItem" id="titleItemResult">
+		<id property="titleItemNo" column="titleItemNo"></id> <!-- PK키 일경우 id태그, 그외엔 result태그 -->
+		<result property="itemNo" column="itemNo"/>
+		<result property="titleNo" column="titleNo"/>
+	</resultMap>
+	
+	<insert id="insertTitleItem">
+		insert into titleItem (titleItemNo, itemNo, titleNo)
+		values(title_item_no.nextval, #{itemNo}, #{titleNo})
+	</insert>
+	
+	<delete id="deleteTitleItemByItem">
+		delete from titleItem where itemNo=#{itemNo}
+	</delete>
+	
+	<delete id="deleteTitleItemByTitle">
+		delete from titleItem where titleNo=#{titleNo}
+	</delete>
+	
+	<select id="getTitleItemListByTitle" resultType="titleItem">
+		select * from titleItem where titleNo=#{titleNo}
+	</select>
+</mapper>

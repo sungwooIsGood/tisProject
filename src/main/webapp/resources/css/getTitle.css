@@ -1,0 +1,73 @@
+@charset "utf-8";
+
+#wrap {padding-left:240px;}
+
+h1 {
+	text-align:center;
+	font-size: 26px;
+	padding:20px;
+}
+
+.getTitle {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.left {
+	float:left;
+	width: 150px;
+}
+
+.right {
+	float:left;
+}
+
+.getTitleRow {
+	padding-top: 10px;
+}
+
+.linkBox {
+	text-align: center;
+}
+
+#poster {
+	width: 300px;
+	height: 500px;
+}
+
+#poster img {
+	width: 300px;
+	height: 500px;
+	object-fit: scale-down;
+}
+
+#backImg {
+	width: 500px;
+	height: 300px;
+}
+
+#backImg img {
+	width: 500px;
+	height: 300px;
+	object-fit: scale-down;
+}
+
+.linkBox > a:hover {
+	color: #ccc;
+}
+
+.getVideoList:hover > a {
+	color: #ccc;
+}
+
+.genre:hover > a {
+	color: #ccc;
+}
+
+.nation:hover > a {
+	color: #ccc;
+}
+
+.point:hover > a {
+	color: #ccc;
+}

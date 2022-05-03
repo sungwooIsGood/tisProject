@@ -1,0 +1,144 @@
+#wrap { width: 100%;  text-align:center; vertical-align:middle;
+   padding-left: 240px; 
+   padding-top: 100px;} 
+
+ #wrap p { color:white; font-size:60px; line-height:300px;}
+
+   img{ width: 223px;
+    height: 100px;
+    margin-left: 87px;
+    margin-top: 100px;}
+
+    .form-control{
+        border-radius: 5px;
+        background: rgb(34, 35, 38);
+        color: white;
+        height: 35px;
+        width: 250px;
+        text-align: center;
+        border: none;
+    }
+    .search-bar{
+        margin-right: 850px;
+        
+    }
+    .top_button{
+        width: 50px;
+        height: 39px;
+        border-radius: 5px;
+        margin-top: 5px;
+        background: rgb(34, 35, 38);
+        border: none;
+        color:  rgb(133, 133, 133);
+        cursor: pointer;
+    }
+    .top_banner{
+        margin-bottom: 30px;
+    }
+    .categoryli{
+        float: left;
+        margin-left: 50px;
+        font-size: 20px;
+        color:  rgb(133, 133, 133);
+        
+    }
+    .category{
+        margin-left: 665px;
+        
+    }
+    ul.tabs li{
+        color: #222;
+        display: inline-block;
+
+    }
+    ul.tabs li.current{
+        background-color: dimgray;
+        color: #222;
+        border-radius: 3px;
+    }
+    
+  .tab-content.current{
+      display: inherit;
+  }
+  .tab-content{
+      display: none;
+  } 
+  
+  /* .lockerbox li {
+  	float: left;
+  } */
+    
+  #a1{
+      background-color: #f6c9cc;
+  }
+  #a2{
+      background-color: #a8c0c0;
+  }
+  #a3{
+      background-color: #febf36;
+  }
+  #a4{
+      background-color: #ff7238;
+  }
+  #a5{
+      background-color: #6475a0;
+  }
+  #a6{
+      background-color: #acc7bf;
+  }
+      
+ #a7{
+     background-color: #c37070;
+ }
+ #a8{
+     background-color: #eae160;
+ }
+ #a9{
+     background-color: #bf7aa3;
+ }
+ #a10{
+    background-color: #FF7F50;
+}
+#a11{
+    background-color: #6495ED;
+}
+#a12{
+    background-color: #B8860B;
+}
+#a13{
+    background-color: #9400D3;
+}
+#a14{
+    background-color: #ADD8E6;
+}
+#a15{
+    background-color: #3CB371;
+}
+#a16{
+    background-color: #FFE4B5;
+}
+#a17{
+    background-color: #8B4513;
+}
+#a18{
+ background-color: #bf7aa3;
+}
+#a19{
+    background-color: #8B4513;
+}
+#a20{
+    background-color: #FF6347;
+}
+    
+img:hover{
+    
+    filter: grayscale(50%);
+}
+h4{
+    margin-left: 65px;
+    margin-top: 10px;
+}
+
+    
+    
+

@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+body{
+	margin:0; padding:0;
+}
+.closeDay{
+	float:left;
+	margin: 0 0 0 150px;
+	padding: 20px;
+}
+.close{
+	padding: 20px;
+}
+img {
+	width: 600px;
+}

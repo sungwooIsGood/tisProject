@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.tisproject.user.mapper.UserMapper">
+
+	<insert id="lockerDo" parameterType="user">
+      insert into locker
+      values(${id},#{locker})
+   </insert>
+    <delete id = "lockerDel" parameterType="user">
+ 		DELETE FROM locker
+ 		WHERE USERID = ${id} and value = ${titleNo}
+ 	</delete>
+   
+   
+	<insert id="reasonDo" parameterType="String">
+      insert into reason
+      values((select nvl(max(no), 0)+1 from reason),#{reason})
+   </insert>
+	<insert id="signUp" parameterType="com.tisproject.biz.user.DTO.UserVO">
+		insert into users(id, userid, password, email, nickname, birthday, gender, favorite_genre1, favorite_genre2, favorite_genre3)
+		values((select nvl(max(id), 0)+1 from users),#{userid},#{password},#{email},#{nickname},#{birthday},#{gender},#{favorite_genre1},#{favorite_genre2},#{favorite_genre3})
+	</insert>
+	<!-- 이름 중복 체크 -->
+	<select id="nameCheck" parameterType="String" resultType="Integer">
+		SELECT COUNT(*) FROM users
+		WHERE nickname = #{nickname}
+	</select>
+	<!-- 아이디 중복 체크 -->
+	<select id="idCheck" parameterType="String" resultType="Integer">
+		SELECT COUNT(*) FROM users
+		WHERE userid = #{userid}
+	</select>
+
+	<select id="loginDo" resultType="user">
+		SELECT * FROM USERS
+		WHERE USERID = #{userid} and PASSWORD = #{password}
+	</select>
+	
+	<select id="manager" parameterType="String" resultType="user">
+		select *
+		from users
+		where userid = #{userid}
+		and password = #{password}
+	</select>
+ 	
+ 	<select id="selectOne" parameterType="String" resultType="user">
+ 		SELECT * FROM users
+ 		WHERE userid = #{userid}
+ 	</select>
+ 	
+ 	
+ 	<update id="profileupdate" parameterType="user">
+ 		UPDATE users
+ 		SET nickname = #{nickname}, password = #{password},
+ 			email = #{email},birthday = #{birthday},
+ 			favorite_genre1 = ${favorite_genre1},
+ 			favorite_genre2 = ${favorite_genre2},
+ 			favorite_genre3 = ${favorite_genre3}
+ 		WHERE userid = #{userid}
+ 	</update>
+  	<select id="mymovielistFG" parameterType="String" resultType="user">
+ 		SELECT FAVORITE_GENRE1, FAVORITE_GENRE2, FAVORITE_GENRE3 FROM USERS
+ 		WHERE USERID = #{userid}
+ 	</select> 
+ 	
+ 	<select id="mymovielist" resultType="user">
+
+ 		select titleNo, title, synopsis, actor, director, releaseDate,
+		   	   updateDate, age, series, poster, backImg
+			   from 
+		    		(select t.titleNo, t.title, t.synopsis, t. actor, t.director, t.releaseDate,
+		       		 t.updateDate, t.age, t.series, t.poster, t.backImg
+			    	from title t
+			    	inner join titleitem ti
+			    	on t.titleNo = ti.titleNo
+			    	inner join item i
+			    	on ti.itemNo = i.itemNo
+			    	inner join users u
+			    	on u.FAVORITE_GENRE1 = i.itemNo
+			    	or u.FAVORITE_GENRE2 = i.itemNo
+			    	or u.FAVORITE_GENRE3 = i.itemNo
+			    	where u.userid = #{userid}
+			    	order by t.titleNo desc)
+			   where rownum <![CDATA[ < ]]>= 5
+ 	</select>
+ 	
+ 	
+ 	 	<select id="mymovielist2" resultType="user">
+
+ 		select titleNo, title, synopsis, actor, director, releaseDate,
+		   	   updateDate, age, series, poster, backImg
+			   from 
+		    		(select t.titleNo, t.title, t.synopsis, t. actor, t.director, t.releaseDate,
+		       		 t.updateDate, t.age, t.series, t.poster, t.backImg
+			    	from users u
+			    	inner join locker l
+			    	on u.id = l.userid
+			    	inner join title t
+			    	on l.value = t.titleNo
+			    	where u.id = ${id}
+			    	order by t.titleNo desc)
+
+			   where rownum <![CDATA[ < ]]>= 5
+ 	</select>
+ 
+ 
+ 	<update id="rankupDo" parameterType="user">
+ 		UPDATE users
+ 		SET RANK = 1
+ 		WHERE id = ${id}
+ 	</update>
+ 	
+ 	<delete id = "userleave" parameterType="user">
+ 		DELETE FROM users
+ 		WHERE ID = ${id}
+ 	</delete>
+ 	
+ 	
+ 	
+ 	<!-- userList -->
+	<!-- <select id="userList" resultType="user">
+		select *
+		from users
+		order by id
+	</select> -->
+	
+	<!-- search -->
+	<sql id="search">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+		<choose>
+            <when test="searchCondition == 'USERID'">
+            	userId like '%'||#{searchKeyword}||'%'
+            </when>
+            <when test="searchCondition == 'NICKNAME'">
+            	nickname like '%'||#{searchKeyword}||'%'
+            </when>
+        </choose>
+		</trim>
+	</sql>
+	
+	<!-- page -->
+	<select id="getListWithPaging" resultType="user">
+		select *
+    		from (
+		    select
+		    rownum rn, id, userId, nickname, password, email, birthday, gender, favorite_genre1, favorite_genre2, favorite_genre3, rank,
+		    genrename1, genrename2, genrename3
+		    from (
+			    select
+			    rownum rn, id, userId, nickname, password, email, birthday, gender, favorite_genre1, favorite_genre2, favorite_genre3, rank,
+			    i1.itemname as genrename1,  i2.itemname as genrename2,  i3.itemname as genrename3
+			    from users u
+			    inner join item i1
+			    on i1.itemno = u.favorite_genre1
+			    inner join item i2
+			    on i2.itemno = u.favorite_genre2
+			    inner join item i3
+			    on i3.itemno = u.favorite_genre3
+		 		where 1 = 1
+				<if test="searchCondition == 'USERID'">
+					AND userId like '%'||#{searchKeyword}||'%'
+				</if>
+				<if test="searchCondition == 'NICKNAME'">
+					AND nickname like '%'||#{searchKeyword}||'%'
+				</if>
+		        order by id desc
+	        )
+		    where id > 0 and rownum > 0 and (#{pageNum} * #{amount}) >= rownum
+		) 
+		
+		where rn > (#{pageNum} - 1) * #{amount}
+	</select>
+
+	<select id="getTotalCount" resultType="int">
+	    <![CDATA[
+	    	select count(*) from users where
+	    ]]>
+	    	<include refid="search"></include>
+	    <![CDATA[
+	    	id > 0
+	    ]]>
+	</select>
+	
+	<!-- 안성우 추가 email 찾기 -->
+   <select id="sendEmail" resultType="user">
+      select email
+      from users
+      where email = #{email}
+      and userid = #{userid}
+   </select>
+    
+    <update id="changePassword">
+       update users
+      set password = #{password}
+      where userid = #{userid}
+      and email = #{email}
+    </update>
+	
+	
+ 	
+</mapper>

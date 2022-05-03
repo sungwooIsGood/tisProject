@@ -1,0 +1,81 @@
+@charset "utf-8";
+
+#wrap {padding-left:240px;}
+
+h1 {
+	text-align:center;
+	font-size: 26px;
+	padding:20px;
+}
+
+.videoList {
+	width: 1200px;
+	margin: 0 auto;
+	text-align:center;
+}
+
+.videoListRow {
+	border-bottom: 1px solid #eee;
+}
+
+.videoListLink {
+	display: box;
+}
+
+.videoListValue:hover > a > p {
+	color: #ccc;
+}
+
+.videoNo, .videoTitle, .videoEpisodeNo, .videoWatchTime {
+	float: left;
+	padding: 3px;
+}
+
+.videoListHead {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.videoNo {
+	width: 100px;
+}
+
+.videoTitle {
+	width: 600px;
+}
+
+.videoEpisodeNo {
+	width: 200px;
+}
+
+.videoWatchTime {
+	width: 300px;
+}
+
+.videoLinkBox {
+	margin-top: 10px;
+}
+
+.insertVideo {
+	float: right;
+}
+
+.getTitle {
+	float: left;
+}
+
+.insertVideo:hover {
+	color: #ccc;
+}
+
+.getTitle:hover {
+	color: #ccc;
+}
+
+.pageNumber:hover {
+	color: #ccc;
+}
+
+.pageArrow:hover {
+	color: #ccc;
+}

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="VideoDAO">
+
+	<resultMap type="video" id="videoResult">
+		<id property="videoNo" column="videoNo"></id> <!-- PK키 일경우 id태그, 그외엔 result태그 -->
+		<result property="titleNo" column="titleNo"/>
+		<result property="videoTitle" column="videoTitle"/>
+		<result property="videoEpisodeNo" column="videoEpisodeNo"/>
+		<result property="videoThumbnail" column="videoThumbnail"/>
+		<result property="videoWatchTime" column="videoWatchTime"/>
+		<result property="video" column="video"/>
+	</resultMap>
+	
+	<insert id="insertVideo">
+		insert into video (videoNo, titleNo, videoTitle, videoEpisodeNo, videoThumbnail, videoWatchTime, video)
+		values(video_no.nextval, #{titleNo}, #{videoTitle}, #{videoEpisodeNo}, #{videoThumbnail}, #{videoWatchTime}, #{video})
+	</insert>
+	
+	<update id="updateVideo">
+		update video set titleNo=#{titleNo}, videoTitle=#{videoTitle},
+		videoEpisodeNo=#{videoEpisodeNo}, video=#{video},
+		videoThumbnail=#{videoThumbnail}, videoWatchTime=#{videoWatchTime}
+		where videoNo=#{videoNo}
+	</update>
+	
+	<delete id="deleteVideo">
+		delete from video where videoNo=#{videoNo}
+	</delete>
+	
+	<select id="getVideo" resultType="video">
+		select * from video where videoNo=#{videoNo}
+	</select>
+	
+	<select id="getVideoList" resultType="video">
+		select * from video where titleNo=#{titleNo}
+		order by videoEpisodeNo asc
+	</select>
+	
+	<delete id="deleteVideoByTitle">
+		delete from video where titleNo=#{titleNo}
+	</delete>
+	
+	<select id="getVideoCount" resultType="int">
+		select count(*) as videoCount
+		from video
+		group by titleNo
+		having titleNo = #{titleNo}
+	</select>
+	
+	<select id="getOtherVideo" resultType="video">
+		select * from video
+		where titleNo=#{titleNo} and videoEpisodeNo=#{videoEpisodeNo}
+	</select>
+	
+	<select id="getLastVideo" resultType="video">
+		select videoNo, titleNo, videoTitle, videoEpisodeNo, videoThumbnail,
+        videoWatchTime, video from
+	    	(select videoNo, titleNo, videoTitle, videoEpisodeNo, videoThumbnail,
+	        videoWatchTime, video
+	        from video
+	        where titleNo=#{titleNo}
+	        order by videoEpisodeNo desc)
+        where rownum = 1
+	</select>
+	<select id="getVideoListPage" resultType="video">
+		<![CDATA[
+			select videoNo, titleNo, videoTitle, videoEpisodeNo, videoThumbnail, videoWatchTime, video
+				from
+				(
+				    select seq, videoNo, titleNo, videoTitle, videoEpisodeNo, videoThumbnail, videoWatchTime, video
+				    from
+				    (
+				        select rownum as seq, videoNo, titleNo, videoTitle, videoEpisodeNo, videoThumbnail, videoWatchTime, video
+				        from(
+				            select *
+				            from video
+				            where titleNo=#{titleNo}
+				            order by videoEpisodeNo desc
+				        )
+				    )
+			    where seq >= #{startVideo}
+			)
+			where rownum <= #{stepVideo}
+		]]>
+	</select>
+	
+	<select id="getVideoByEpisodeNo" resultType="video">
+		select * from video where titleNo=#{titleNo} and videoEpisodeNo=#{videoEpisodeNo}
+	</select>
+</mapper>
