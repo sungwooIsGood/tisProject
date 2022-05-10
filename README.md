@@ -19,7 +19,7 @@
   * 실시간 평점을 통해 해당 영상 인기여부 모니터링 가능
   * 평점, 찜목록, 공유 기능 구현
 
-### Results
+## Results
 1. 로그인 및 회원가입
 ![login](https://user-images.githubusercontent.com/98163632/167560438-a842c16b-024e-4cb8-ba27-21a4e7150464.png)
 ![SignUp](https://user-images.githubusercontent.com/98163632/167561208-31e0d9b7-95d6-4984-a32a-db4545e8e68a.png)
