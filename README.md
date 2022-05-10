@@ -33,3 +33,9 @@
 4. 동영상 보는 화면
 ![videoInfo](https://user-images.githubusercontent.com/98163632/167561617-5647d023-a958-44f0-8be3-da3c2f7f1dfc.png)
 ![videoPlay](https://user-images.githubusercontent.com/98163632/167561664-248d1477-d700-48a5-ba96-3605919e2e93.png)
+
+5. 마이페이지(결제 및 찜목록)
+![myPage](https://user-images.githubusercontent.com/98163632/167562828-f1730289-63db-4c2e-a847-0984b0c6fd03.png)
+
+6. 관리자페이지
+![adminPage](https://user-images.githubusercontent.com/98163632/167562924-f6ac0259-cb4f-4218-acc4-64ca277e45d5.png)
